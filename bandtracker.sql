@@ -159,6 +159,15 @@ ALTER TABLE ONLY venues ALTER COLUMN id SET DEFAULT nextval('venues_id_seq'::reg
 --
 
 COPY band_venue (id, band_id, venue_id) FROM stdin;
+3	27	2
+4	27	5
+5	27	6
+12	42	13
+13	42	14
+14	42	15
+15	42	16
+16	42	17
+17	42	18
 \.
 
 
@@ -166,7 +175,7 @@ COPY band_venue (id, band_id, venue_id) FROM stdin;
 -- Name: band_venue_id_seq; Type: SEQUENCE SET; Schema: public; Owner: MW
 --
 
-SELECT pg_catalog.setval('band_venue_id_seq', 1, false);
+SELECT pg_catalog.setval('band_venue_id_seq', 17, true);
 
 
 --
@@ -174,6 +183,20 @@ SELECT pg_catalog.setval('band_venue_id_seq', 1, false);
 --
 
 COPY bands (id, name) FROM stdin;
+42	Sum 41
+43	NOFX
+44	Green Day
+45	Ramones
+46	Blink-182
+47	Black Flag
+48	The Clash
+49	Bad Religion
+50	Social Distortion
+51	The Offspring
+52	My Chemical Romance
+53	Rise Against
+54	The Misfits
+55	Pennywise
 \.
 
 
@@ -181,7 +204,7 @@ COPY bands (id, name) FROM stdin;
 -- Name: bands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: MW
 --
 
-SELECT pg_catalog.setval('bands_id_seq', 1, false);
+SELECT pg_catalog.setval('bands_id_seq', 55, true);
 
 
 --
@@ -189,6 +212,16 @@ SELECT pg_catalog.setval('bands_id_seq', 1, false);
 --
 
 COPY venues (id, name) FROM stdin;
+13	Kodiak Theatre
+14	Ak Chin Pavilion
+15	Comerica Theatre
+16	Marquee Theatre
+17	LiveWire
+18	ASU Gammage
+19	Celebrity Theatre
+20	CLUB RED
+21	Crescent Ballroom
+22	Nile Theater
 \.
 
 
@@ -196,7 +229,7 @@ COPY venues (id, name) FROM stdin;
 -- Name: venues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: MW
 --
 
-SELECT pg_catalog.setval('venues_id_seq', 1, false);
+SELECT pg_catalog.setval('venues_id_seq', 22, true);
 
 
 --
