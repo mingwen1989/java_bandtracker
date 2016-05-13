@@ -101,11 +101,11 @@ public class App {
       return null;
     });
 
-    // post("/sort", (request, response) -> {
-    //   Recipe.sortRating();
-    //   response.redirect("/recipes");
-    //   return null;
-    // });
+    post("/delete", (request, response) -> {
+      Band.deleteAll();
+      response.redirect("/bands");
+      return null;
+    });
 
   }
 }

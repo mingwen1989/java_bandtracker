@@ -10,9 +10,15 @@
 
 <form action="/bands" method="post">
   <label for="bandName"></label>
-    <input type="text" name="bandName" id="bandName"></input>
+    <input type="text" name="bandName" id="bandName" required></input>
 
   <button class="btn">Add Band</button>
+</form>
+
+<h1>Delete Bands</h1>
+<form action="/delete" method="post">
+
+  <button type="submit" class="btn">***Delete Bands Permanently***</button>
 </form>
 
 <br><a href="/venues">View Venues >></a>

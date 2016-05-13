@@ -109,4 +109,11 @@ public class Band {
      }
    }
 
+   public static void deleteAll() {
+      try(Connection con = DB.sql2o.open()) {
+      String deleteBands = "TRUNCATE bands";
+      con.createQuery(deleteBands)
+        .executeUpdate();
+      }
+    }
 }

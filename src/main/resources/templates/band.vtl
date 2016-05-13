@@ -23,7 +23,7 @@
 
 <h3>Update Band</h3>
 <form action="/bands/$band.getId()/update" method="post">
-  <input type="text" placeholder="Title" id="updateBandName" name="updateBandName"></input>
+  <input type="text" placeholder="Title" id="updateBandName" name="updateBandName" required></input>
 
   <button type="submit" class="btn">Update Band Name</button>
 </form>
@@ -33,3 +33,5 @@
 
   <button type="submit" class="btn">***Delete Band***</button>
 </form>
+
+<br><a href="/bands"><< Back to Bands</a>
