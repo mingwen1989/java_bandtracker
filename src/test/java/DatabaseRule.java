@@ -1,0 +1,26 @@
+import org.junit.rules.ExternalResource;
+import org.sql2o.*;
+
+public class DatabaseRule extends ExternalResource {
+
+  @Override
+  protected void before() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/bandtracker_test", null, null);
+  }
+
+  // @Override
+  // protected void after() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String deleteRecipesQuery = "DELETE FROM recipes *;";
+  //     String deleteTagsQuery = "DELETE FROM tags *;";
+  //     String deleteRecipeTagQuery = "DELETE FROM recipe_tag *;";
+  //     String deleteIngredientsQuery = "DELETE FROM ingredients *;";
+  //     String deleteRecipeIngredientQuery = "DELETE FROM recipe_ingredient *;";
+  //     con.createQuery(deleteRecipesQuery).executeUpdate();
+  //     con.createQuery(deleteTagsQuery).executeUpdate();
+  //     con.createQuery(deleteRecipeTagQuery).executeUpdate();
+  //     con.createQuery(deleteIngredientsQuery).executeUpdate();
+  //     con.createQuery(deleteRecipeIngredientQuery).executeUpdate();
+  //   }
+  // }
+}
