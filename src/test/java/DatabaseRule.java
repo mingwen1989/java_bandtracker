@@ -8,19 +8,16 @@ public class DatabaseRule extends ExternalResource {
     DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/bandtracker_test", null, null);
   }
 
-  // @Override
-  // protected void after() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String deleteRecipesQuery = "DELETE FROM recipes *;";
-  //     String deleteTagsQuery = "DELETE FROM tags *;";
-  //     String deleteRecipeTagQuery = "DELETE FROM recipe_tag *;";
-  //     String deleteIngredientsQuery = "DELETE FROM ingredients *;";
-  //     String deleteRecipeIngredientQuery = "DELETE FROM recipe_ingredient *;";
-  //     con.createQuery(deleteRecipesQuery).executeUpdate();
-  //     con.createQuery(deleteTagsQuery).executeUpdate();
-  //     con.createQuery(deleteRecipeTagQuery).executeUpdate();
-  //     con.createQuery(deleteIngredientsQuery).executeUpdate();
-  //     con.createQuery(deleteRecipeIngredientQuery).executeUpdate();
-  //   }
-  // }
+  @Override
+  protected void after() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteBandsQuery = "DELETE FROM bands *;";
+      String deleteVenuesQuery = "DELETE FROM venues *;";
+      String deleteBandVenueQuery = "DELETE FROM band_venue *;";
+
+      con.createQuery(deleteBandsQuery).executeUpdate();
+      con.createQuery(deleteVenuesQuery).executeUpdate();
+      con.createQuery(deleteBandVenueQuery).executeUpdate();
+    }
+  }
 }

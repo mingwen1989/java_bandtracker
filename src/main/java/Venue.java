@@ -38,15 +38,15 @@ public class Venue {
   //   }
   // }
   //
-  // public void save() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "INSERT INTO venues(name) VALUES (:name)";
-  //     this.id = (int) con.createQuery(sql, true)
-  //       .addParameter("name", this.name)
-  //       .executeUpdate()
-  //       .getKey();
-  //   }
-  // }
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO venues(name) VALUES (:name)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .executeUpdate()
+        .getKey();
+    }
+  }
   //
   // public static Venue find(int id) {
   //   try(Connection con = DB.sql2o.open()) {
@@ -78,29 +78,29 @@ public class Venue {
   //   }
   // }
   //
-  // public List<Recipe> getRecipes() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String joinQuery = "SELECT recipe_id FROM recipe_venue WHERE venue_id = :venue_id";
-  //     List<Integer> recipeIds = con.createQuery(joinQuery)
-  //       .addParameter("venue_id", this.getId())
-  //       .executeAndFetch(Integer.class);
-  //
-  //     List<Recipe> recipes = new ArrayList<Recipe>();
-  //
-  //     for (Integer recipeId : recipeIds) {
-  //       String recipeQuery = "SELECT * FROM recipes WHERE id = :recipeId";
-  //       Recipe recipe = con.createQuery(recipeQuery)
-  //         .addParameter("recipeId", recipeId)
-  //         .executeAndFetchFirst(Recipe.class);
-  //       recipes.add(recipe);
-  //     }
-  //     // if (recipes.size() == 0) {
-  //     //   return null;
-  //     // } else {
-  //       return recipes;
-  //     // }
-  //   }
-  // }
+  public List<Band> getBands() {
+    try(Connection con = DB.sql2o.open()) {
+      String joinQuery = "SELECT band_id FROM band_venue WHERE venue_id = :venue_id";
+      List<Integer> bandIds = con.createQuery(joinQuery)
+        .addParameter("venue_id", this.getId())
+        .executeAndFetch(Integer.class);
+
+      List<Band> bands = new ArrayList<Band>();
+
+      for (Integer bandId : bandIds) {
+        String bandQuery = "SELECT * FROM bands WHERE id = :bandId";
+        Band band = con.createQuery(bandQuery)
+          .addParameter("bandId", bandId)
+          .executeAndFetchFirst(Band.class);
+        bands.add(band);
+      }
+      // if (recipes.size() == 0) {
+      //   return null;
+      // } else {
+        return bands;
+      // }
+    }
+  }
   //
   // public void delete() {
   // try(Connection con = DB.sql2o.open()) {

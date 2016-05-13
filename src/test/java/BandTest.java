@@ -8,93 +8,91 @@ public class BandTest {
   public DatabaseRule database = new DatabaseRule();
 
   @Test
-  public void Recipe_Instantiates_true() {
+  public void Band_Instantiates_true() {
     Band myBand = new Band("Blink-182");
     assertEquals(true, myBand instanceof Band);
   }
+
+  @Test
+  public void getBandinfo_bandInstantiates_String() {
+    Band myBand = new Band("Blink-182");
+    assertEquals("Blink-182", myBand.getName());
+  }
+
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Band.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfNamesAretheSame() {
+    Band firstBand = new Band("Blink-182");
+    Band secondBand = new Band("Blink-182");
+    assertTrue(firstBand.equals(secondBand));
+  }
   //
+  @Test
+  public void save_savesIntoDatabase_true() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    assertTrue(Band.all().get(0).equals(myBand));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    Band savedBand = Band.all().get(0);
+    assertEquals(myBand.getId(), savedBand.getId());
+  }
+
+  @Test
+  public void find_findBandInDatabase_true() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    Band savedBand = Band.find(myBand.getId());
+    assertTrue(myBand.equals(savedBand));
+  }
+
+  @Test
+  public void update_updatesName_true() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    myBand.update("Blink-182");
+    assertEquals("Blink-182", Band.find(myBand.getId()).getName());
+  }
+
   // @Test
-  // public void getRecipe_recipleInstantiates_String() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   assertEquals("Lemon Pie", myRecipe.getTitle());
-  //   assertEquals("1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", myRecipe.getInstructions());
-  //   assertEquals(5, myRecipe.getRating());
+  // public void addBand_addsBandToAlbum_true() {
+  //   Band myBand = new Band("Blink-182");
+  //   myBand.save();
+  //   Venue myVenue = new Venue("Marquee Theater");
+  //   myVenue.save();
+  //   myBand.addVenue(myVenue);
+  //   Venue savedVenue = myBand.getVenues().get(0);
+  //   assertTrue(myVenue.equals(savedVenue));
   // }
-  //
-  // @Test
-  // public void all_emptyAtFirst() {
-  //   assertEquals(Recipe.all().size(), 0);
-  // }
-  //
-  // @Test
-  // public void equals_returnsTrueIfNamesAretheSame() {
-  //   Recipe firstRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   Recipe secondRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   assertTrue(firstRecipe.equals(secondRecipe));
-  // }
-  //
-  // @Test
-  // public void save_savesIntoDatabase_true() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   assertTrue(Recipe.all().get(0).equals(myRecipe));
-  // }
-  //
-  // @Test
-  // public void save_assignsIdToObject() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   Recipe savedRecipe = Recipe.all().get(0);
-  //   assertEquals(myRecipe.getId(), savedRecipe.getId());
-  // }
-  //
-  // @Test
-  // public void find_findRecipeInDatabase_true() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   Recipe savedRecipe = Recipe.find(myRecipe.getId());
-  //   assertTrue(myRecipe.equals(savedRecipe));
-  // }
-  //
-  // @Test
-  // public void update_updatesTitle_true() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   myRecipe.update("Apple Pie", "1. Mix apples with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 4);
-  //   assertEquals("Apple Pie", Recipe.find(myRecipe.getId()).getTitle());
-  //   assertEquals("1. Mix apples with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", Recipe.find(myRecipe.getId()).getInstructions());
-  //   assertEquals(4, Recipe.find(myRecipe.getId()).getRating());
-  // }
-  //
-  // @Test
-  // public void addTag_addsTagToAlbum_true() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   myRecipe.addTag(myTag);
-  //   Tag savedTag = myRecipe.getTags().get(0);
-  //   assertTrue(myTag.equals(savedTag));
-  // }
-  // @Test
-  // public void getTags_returnsAllTags_List() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   myRecipe.addTag(myTag);
-  //   List savedTags = myRecipe.getTags();
-  //   assertEquals(1, savedTags.size());
-  // }
-  //
-  // @Test
-  // public void delete_deletesAllTagsAndRecipesAssociations() {
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   Tag myTag = new Tag("American");
-  //   myRecipe.addTag(myTag);
-  //   myRecipe.delete();
-  //   assertEquals(0, myTag.getRecipes().size());
-  // }
+
+  @Test
+  public void getVenues_returnsAllVenues_List() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    Venue myVenue = new Venue("Marquee Theater");
+    myVenue.save();
+    myBand.addVenue(myVenue);
+    List savedVenues = myBand.getVenues();
+    assertEquals(1, savedVenues.size());
+  }
+
+
+  @Test
+  public void delete_deletesAllBandsAndVenuesAssociations() {
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    Venue myVenue = new Venue("Marquee Theater");
+    myBand.addVenue(myVenue);
+    myBand.delete();
+    assertEquals(0, myVenue.getBands().size());
+  }
 
 }

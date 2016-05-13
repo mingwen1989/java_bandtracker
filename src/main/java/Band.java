@@ -20,7 +20,7 @@ public class Band {
   }
 
   public static List<Band> all() {
-    String sql = "SELECT id, title, instructions, rating FROM bands";
+    String sql = "SELECT id, name FROM bands";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Band.class);
     }
@@ -92,11 +92,7 @@ public class Band {
            .executeAndFetchFirst(Venue.class);
          venues.add(venue);
        }
-      //  if (venues.size() == 0) {
-      //    return null;
-      //  } else {
          return venues;
-      //  }
      }
    }
 
