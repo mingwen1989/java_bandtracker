@@ -1,0 +1,27 @@
+<h1>$venue.getName()</h1>
+
+<div class="container">
+#if($venue.getRecipes().size() != 0)
+  Bands for this Venue:
+  <ul>
+    #foreach($band in $venue.getBands())
+      <li>$band.getName()</li>
+    #end
+  </ul>
+#end
+</div>
+
+<h3>Update Venue</h3>
+  <form action="/venues/$venue.getId()/update" method="post">
+    <input type="text" id="updateVenueName" name="updateVenueName"></input>
+
+    <button type="submit" class="btn">Update Venue</button>
+  </form>
+
+<h3>Delete Venue</h3>
+  <form action="/venues/$venue.getId()/delete" method="post">
+
+    <button type="submit" class="btn">***Delete Venue***</button>
+  </form>
+
+<br><a href="/bands"><< View Bands</a>

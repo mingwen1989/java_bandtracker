@@ -47,27 +47,27 @@ public class Venue {
         .getKey();
     }
   }
+
+  public static Venue find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM venues where id=:id";
+      Venue venue = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Venue.class);
+      return venue;
+    }
+  }
   //
-  // public static Venue find(int id) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM venues where id=:id";
-  //     Venue venue = con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeAndFetchFirst(Venue.class);
-  //     return venue;
-  //   }
-  // }
-  //
-  // public void update(String newVenue) {
-  //   try(Connection con = DB.sql2o.open()){
-  //     String sql = "UPDATE venues SET name = :name WHERE id = :id";
-  //     con.createQuery(sql)
-  //     .addParameter("name", newVenue)
-  //     .addParameter("id", this.id)
-  //     .executeUpdate();
-  //   }
-  // }
-  //
+  public void update(String newVenue) {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "UPDATE venues SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("name", newVenue)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
+
   // public void addRecipe(Recipe recipe) {
   //   try(Connection con = DB.sql2o.open()) {
   //     String sql = "INSERT INTO recipe_venue (recipe_id, venue_id) VALUES (:recipe_id, :venue_id)";
@@ -94,26 +94,22 @@ public class Venue {
           .executeAndFetchFirst(Band.class);
         bands.add(band);
       }
-      // if (recipes.size() == 0) {
-      //   return null;
-      // } else {
         return bands;
-      // }
     }
   }
-  //
-  // public void delete() {
-  // try(Connection con = DB.sql2o.open()) {
-  //   String deleteQuery = "DELETE FROM venues WHERE id = :id;";
-  //     con.createQuery(deleteQuery)
-  //       .addParameter("id", this.getId())
-  //       .executeUpdate();
-  //
-  //   String joinDeleteQuery = "DELETE FROM recipe_venue WHERE venue_id = :venue_id";
-  //     con.createQuery(joinDeleteQuery)
-  //       .addParameter("venue_id", this.getId())
-  //       .executeUpdate();
-  //   }
-  // }
+
+  public void delete() {
+  try(Connection con = DB.sql2o.open()) {
+    String deleteQuery = "DELETE FROM venues WHERE id = :id;";
+      con.createQuery(deleteQuery)
+        .addParameter("id", this.getId())
+        .executeUpdate();
+
+    String joinDeleteQuery = "DELETE FROM band_venue WHERE venue_id = :venue_id";
+      con.createQuery(joinDeleteQuery)
+        .addParameter("venue_id", this.getId())
+        .executeUpdate();
+    }
+  }
 
 }

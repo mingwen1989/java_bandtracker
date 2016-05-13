@@ -22,13 +22,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // get("/tags", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   model.put("taglist", Tag.all());
-    //   model.put("template", "templates/tags.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
+    get("/venues", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("venues", Venue.all());
+      model.put("template", "templates/venues.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     post("/bands", (request, response) -> {
       String name = request.queryParams("bandName");
       Band newBand = new Band(name);
@@ -36,73 +36,71 @@ public class App {
       response.redirect("/bands");
       return null;
     });
-    //
-    // post("/tags", (request, response) -> {
-    //   String tagTitle = request.queryParams("tagTitle");
-    //   Tag newTag = new Tag(tagTitle);
-    //   newTag.save();
-    //   response.redirect("/tags");
-    //   return null;
-    // });
-    //
-    get("/recipes/:id", (request, response) -> {
+
+    post("/venues", (request, response) -> {
+      String venueName = request.queryParams("venueName");
+      Venue newVenue = new Venue(venueName);
+      newVenue.save();
+      response.redirect("/venues");
+      return null;
+    });
+
+    get("/bands/:id", (request, response) -> {
       HashMap<String,Object> model = new HashMap<String,Object>();
-      Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
-      model.put("recipe", recipe);
-      model.put("allTags", Tag.all());
-      model.put("template", "templates/recipe.vtl");
+      Band band = Band.find(Integer.parseInt(request.params(":id")));
+      model.put("band", band);
+      model.put("allVenues", Venue.all());
+      model.put("template", "templates/band.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // post("/recipes/:id/add_tag", (request, response) -> {
-    //   Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
-    //   int newTag = Integer.parseInt(request.queryParams("tag_id"));
-    //   recipe.addTag(Tag.find(newTag));
-    //   response.redirect("/recipes/" + recipe.getId());
-    //   return null;
-    // });
-    //
-    // post("/recipes/:id/update", (request, response) -> {
-    //   Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
-    //   String updateRecipeTitle = request.queryParams("updateRecipeTitle");
-    //   String updateRecipeInstruction = request.queryParams("updateRecipeInstruction");
-    //   int updateRecipeRating = Integer.parseInt(request.queryParams("updateRecipeRating"));
-    //   recipe.update(updateRecipeTitle, updateRecipeInstruction, updateRecipeRating);
-    //   response.redirect("/recipes/" + recipe.getId());
-    //   return null;
-    // });
-    //
-    // post("/recipes/:id/delete", (request, response) -> {
-    //   Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
-    //   recipe.delete();
-    //   response.redirect("/recipes");
-    //   return null;
-    // });
-    //
-    // get("/tags/:id", (request, response) -> {
-    //   HashMap<String,Object> model = new HashMap<String,Object>();
-    //   Tag tag = Tag.find(Integer.parseInt(request.params(":id")));
-    //   model.put("tag", tag);
-    //   model.put("allRecipes", Recipe.all());
-    //   model.put("template", "templates/tag.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // post("/tags/:id/update", (request, response) -> {
-    //   Tag tag = Tag.find(Integer.parseInt(request.params(":id")));
-    //   String updateTag = request.queryParams("updateTagName");
-    //   tag.update(updateTag);
-    //   response.redirect("/tags/" + tag.getId());
-    //   return null;
-    // });
-    //
-    // post("/tags/:id/delete", (request, response) -> {
-    //   Tag tag = Tag.find(Integer.parseInt(request.params(":id")));
-    //   tag.delete();
-    //   response.redirect("/tags");
-    //   return null;
-    // });
-    //
+    post("/bands/:id/add_venue", (request, response) -> {
+      Band band = Band.find(Integer.parseInt(request.params(":id")));
+      int newVenue = Integer.parseInt(request.queryParams("venue_id"));
+      band.addVenue(Venue.find(newVenue));
+      response.redirect("/bands/" + band.getId());
+      return null;
+    });
+
+    post("/bands/:id/update", (request, response) -> {
+      Band band = Band.find(Integer.parseInt(request.params(":id")));
+      String updateBandName = request.queryParams("updateBandName");
+      band.update(updateBandName);
+      response.redirect("/bands/" + band.getId());
+      return null;
+    });
+
+    post("/bands/:id/delete", (request, response) -> {
+      Band band = Band.find(Integer.parseInt(request.params(":id")));
+      band.delete();
+      response.redirect("/bands");
+      return null;
+    });
+
+    get("/venues/:id", (request, response) -> {
+      HashMap<String,Object> model = new HashMap<String,Object>();
+      Venue venue = Venue.find(Integer.parseInt(request.params(":id")));
+      model.put("venue", venue);
+      model.put("allBands", Band.all());
+      model.put("template", "templates/venue.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/venues/:id/update", (request, response) -> {
+      Venue venue = Venue.find(Integer.parseInt(request.params(":id")));
+      String updateVenue = request.queryParams("updateVenueName");
+      venue.update(updateVenue);
+      response.redirect("/venues/" + venue.getId());
+      return null;
+    });
+
+    post("/venues/:id/delete", (request, response) -> {
+      Venue venue = Venue.find(Integer.parseInt(request.params(":id")));
+      venue.delete();
+      response.redirect("/venues");
+      return null;
+    });
+
     // post("/sort", (request, response) -> {
     //   Recipe.sortRating();
     //   response.redirect("/recipes");
