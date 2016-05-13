@@ -15,13 +15,13 @@ public class App {
       return new ModelAndView(model,layout);
     }, new VelocityTemplateEngine());
 
-    // get("/recipes",(request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String,Object>();
-    //   model.put("recipes", Recipe.all());
-    //   model.put("template", "templates/recipes.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
+    get("/bands",(request, response) -> {
+      HashMap<String, Object> model = new HashMap<String,Object>();
+      model.put("bands", Band.all());
+      model.put("template", "templates/bands.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     // get("/tags", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
     //   model.put("taglist", Tag.all());
@@ -29,15 +29,13 @@ public class App {
     //   return new ModelAndView(model, layout);
     // }, new VelocityTemplateEngine());
     //
-    // post("/recipes", (request, response) -> {
-    //   String title = request.queryParams("recipeTitle");
-    //   String instructions = request.queryParams("recipeInstructions");
-    //   int rating = Integer.parseInt(request.queryParams("recipeRating"));
-    //   Recipe newRecipe = new Recipe(title, instructions, rating);
-    //   newRecipe.save();
-    //   response.redirect("/recipes");
-    //   return null;
-    // });
+    post("/bands", (request, response) -> {
+      String name = request.queryParams("bandName");
+      Band newBand = new Band(name);
+      newBand.save();
+      response.redirect("/bands");
+      return null;
+    });
     //
     // post("/tags", (request, response) -> {
     //   String tagTitle = request.queryParams("tagTitle");
@@ -47,15 +45,15 @@ public class App {
     //   return null;
     // });
     //
-    // get("/recipes/:id", (request, response) -> {
-    //   HashMap<String,Object> model = new HashMap<String,Object>();
-    //   Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
-    //   model.put("recipe", recipe);
-    //   model.put("allTags", Tag.all());
-    //   model.put("template", "templates/recipe.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
+    get("/recipes/:id", (request, response) -> {
+      HashMap<String,Object> model = new HashMap<String,Object>();
+      Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
+      model.put("recipe", recipe);
+      model.put("allTags", Tag.all());
+      model.put("template", "templates/recipe.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     // post("/recipes/:id/add_tag", (request, response) -> {
     //   Recipe recipe = Recipe.find(Integer.parseInt(request.params(":id")));
     //   int newTag = Integer.parseInt(request.queryParams("tag_id"));
