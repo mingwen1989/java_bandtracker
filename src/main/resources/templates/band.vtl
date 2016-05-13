@@ -1,4 +1,4 @@
-<h1>$band.getName()</h1>
+<h1>$band.getName()</h1><hr>
 
 #if($recipe.getTags().size() != 0)
   <h3>Venues for this Band</h3>
@@ -23,7 +23,7 @@
 
 <h3>Update Band</h3>
 <form action="/bands/$band.getId()/update" method="post">
-  <input type="text" placeholder="Title" id="updateBandName" name="updateBandName" required></input>
+  <input type="text" placeholder="Name" id="updateBandName" name="updateBandName" required></input>
 
   <button type="submit" class="btn">Update Band Name</button>
 </form>
@@ -34,4 +34,6 @@
   <button type="submit" class="btn">***Delete Band***</button>
 </form>
 
-<br><a href="/bands"><< Back to Bands</a>
+<br><a href="/bands"><< Back to Bands</a> | <a href="/venues">Forward to Venues >></a>
+
+<img src="../vinyl.gif" style="width:450px;float:right;margin-right:50px;margin-top:-300px">

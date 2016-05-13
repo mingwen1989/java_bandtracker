@@ -107,5 +107,11 @@ public class App {
       return null;
     });
 
+    post("/delete_venues", (request, response) -> {
+      Venue.deleteAll();
+      response.redirect("/venues");
+      return null;
+    });
+
   }
 }

@@ -112,4 +112,12 @@ public class Venue {
     }
   }
 
+  public static void deleteAll() {
+     try(Connection con = DB.sql2o.open()) {
+     String deleteVenues = "TRUNCATE venues";
+     con.createQuery(deleteVenues)
+       .executeUpdate();
+     }
+   }
+
 }

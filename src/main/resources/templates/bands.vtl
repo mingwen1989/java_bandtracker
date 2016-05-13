@@ -1,24 +1,33 @@
-<h1>Bands</h1>
+<h1>Band Tracker &mdash; Bands</h1><hr>
+<div class="col-md-4">
+  <h3>Bands</h3>
 
-#foreach($band in $bands)
-  <ul>
-    <li><a href = "/bands/$band.getId()">$band.getName()</a></li>
-  </ul>
-#end
+  #foreach($band in $bands)
+    <ul>
+      <li><a href = "/bands/$band.getId()">$band.getName()</a></li>
+    </ul>
+  #end
+</div>
 
-<h1>Add a Band:</h1>
+<div class="col-md-4">
+  <h3>Add a Band:</h3>
 
-<form action="/bands" method="post">
-  <label for="bandName"></label>
-    <input type="text" name="bandName" id="bandName" required></input>
+  <form action="/bands" method="post">
+    <label for="bandName"></label>
+      <input type="text" name="bandName" id="bandName" required></input>
 
-  <button class="btn">Add Band</button>
-</form>
+    <button class="btn">Add Band</button>
+  </form>
+</div>
 
-<h1>Delete Bands</h1>
-<form action="/delete" method="post">
+<div class="col-md-4">
+  <h3>Delete Bands</h3>
+  <form action="/delete" method="post">
 
-  <button type="submit" class="btn">***Delete Bands Permanently***</button>
-</form>
+    <button type="submit" class="btn">***Delete Bands Permanently***</button>
+  </form>
 
-<br><a href="/venues">View Venues >></a>
+  <br><br><a href="/venues" class="btn">View Venues >></a>
+</div>
+
+<img src="vinyl.gif" style="width:300px;float:right">
