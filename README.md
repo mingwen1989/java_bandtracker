@@ -29,7 +29,7 @@ Open a new tab in terminal by pressing ⌘t and create `bandtracker` database:
 ```
 $ psql
 $ CREATE DATABASE bandtracker;
-\c to_do;
+\c bandtracker;
 $ CREATE TABLE bands (id serial PRIMARY KEY, name varchar);
 $ CREATE TABLE venues (id serial PRIMARY KEY, name varchar);
 $ CREATE DATABASE bandtracker_test WITH TEMPLATE bandtracker;
