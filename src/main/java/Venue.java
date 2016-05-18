@@ -27,17 +27,17 @@ public class Venue {
     }
   }
 
-  // @Override
-  // public boolean equals(Object otherVenue) {
-  //   if (!(otherVenue instanceof Venue)) {
-  //     return false;
-  //   } else {
-  //     Venue newVenue = (Venue) otherVenue;
-  //     return this.getName().equals(newVenue.getName()) &&
-  //            this.getId() == newVenue.getId();
-  //   }
-  // }
-  //
+  @Override
+  public boolean equals(Object otherVenue) {
+    if (!(otherVenue instanceof Venue)) {
+      return false;
+    } else {
+      Venue newVenue = (Venue) otherVenue;
+      return this.getName().equals(newVenue.getName()) &&
+             this.getId() == newVenue.getId();
+    }
+  }
+
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO venues(name) VALUES (:name)";
@@ -68,16 +68,16 @@ public class Venue {
     }
   }
 
-  // public void addRecipe(Recipe recipe) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "INSERT INTO recipe_venue (recipe_id, venue_id) VALUES (:recipe_id, :venue_id)";
-  //     con.createQuery(sql)
-  //     .addParameter("venue_id", this.getId())
-  //     .addParameter("recipe_id", recipe.getId())
-  //     .executeUpdate();
-  //   }
-  // }
-  //
+  public void addBand(Band band) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO band_venue (band_id, venue_id) VALUES (:band_id, :venue_id)";
+      con.createQuery(sql)
+      .addParameter("venue_id", this.getId())
+      .addParameter("band_id", band.getId())
+      .executeUpdate();
+    }
+  }
+
   public List<Band> getBands() {
     try(Connection con = DB.sql2o.open()) {
       String joinQuery = "SELECT band_id FROM band_venue WHERE venue_id = :venue_id";

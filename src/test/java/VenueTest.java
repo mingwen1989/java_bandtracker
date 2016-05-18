@@ -9,88 +9,88 @@ public class VenueTest {
 
   @Test
   public void Venue_Instantiates_true() {
-    Venue myVenue = new Venue("Marquee Theater");
+    Venue myVenue = new Venue("Marquee Theatre");
     assertEquals(true, myVenue instanceof Venue);
   }
-  //
-  // @Test
-  // public void getTageInfo_TagInstantiates_String() {
-  //   Tag myTag = new Tag("American");
-  //   assertEquals("American", myTag.getName());
-  // }
-  //
-  // @Test
-  // public void all_emptyAtFirst() {
-  //   assertEquals(Tag.all().size(), 0);
-  // }
-  //
-  // @Test
-  // public void equals_returnsTrueIfNamesAretheSame() {
-  //   Tag firstTag = new Tag("American");
-  //   Tag secondTag = new Tag("American");
-  //   assertTrue(firstTag.equals(secondTag));
-  // }
-  //
-  // @Test
-  // public void save_savesIntoDatabase_true() {
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   assertTrue(Tag.all().get(0).equals(myTag));
-  // }
-  //
-  // @Test
-  // public void save_assignsIdToObject() {
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   Tag savedTag = Tag.all().get(0);
-  //   assertEquals(myTag.getId(), savedTag.getId());
-  // }
-  //
-  // @Test
-  // public void find_findTagInDatabase_true() {
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   Tag savedTag = Tag.find(myTag.getId());
-  //   assertTrue(myTag.equals(savedTag));
-  // }
-  //
-  // @Test
-  // public void update_updatesTag_true() {
-  //   Tag myTag = new Tag("American");
-  //   myTag.save();
-  //   myTag.update("French");
-  //   assertEquals("French", Tag.find(myTag.getId()).getName());
-  // }
-  //
-  // @Test
-  // public void addRecipe_addsRecipeToTag_true() {
-  //   Tag myTag = new Tag("Pop");
-  //   myTag.save();
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   myTag.addRecipe(myRecipe);
-  //   Recipe savedRecipe = myTag.getRecipes().get(0);
-  //   assertTrue(myRecipe.equals(savedRecipe));
-  // }
-  //
-  // @Test
-  // public void getRecipes_returnsAllRecipes_List() {
-  //   Tag myTag = new Tag("Pop");
-  //   myTag.save();
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myRecipe.save();
-  //   myTag.addRecipe(myRecipe);
-  //   List savedRecipes = myTag.getRecipes();
-  //   assertEquals(1, savedRecipes.size());
-  // }
-  //
-  // @Test
-  // public void delete_deletesAllRecipesAndTagsAssociations() {
-  //   Tag myTag = new Tag("Pop");
-  //   myTag.save();
-  //   Recipe myRecipe = new Recipe("Lemon Pie", "1. Mix lemons with cake batter. 2. Bake at 350 degrees for 40 minutes. 3. Enjoy", 5);
-  //   myTag.addRecipe(myRecipe);
-  //   myTag.delete();
-  //   assertEquals(0, myRecipe.getTags().size());
-  // }
+
+  @Test
+  public void getVenueeInfo_VenueInstantiates_String() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    assertEquals("Marquee Theatre", myVenue.getName());
+  }
+
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Venue.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfNamesAretheSame() {
+    Venue firstVenue = new Venue("Marquee Theatre");
+    Venue secondVenue = new Venue("Marquee Theatre");
+    assertTrue(firstVenue.equals(secondVenue));
+  }
+
+  @Test
+  public void save_savesIntoDatabase_true() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    assertTrue(Venue.all().get(0).equals(myVenue));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    Venue savedVenue = Venue.all().get(0);
+    assertEquals(myVenue.getId(), savedVenue.getId());
+  }
+
+  @Test
+  public void find_findVenueInDatabase_true() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    Venue savedVenue = Venue.find(myVenue.getId());
+    assertTrue(myVenue.equals(savedVenue));
+  }
+
+  @Test
+  public void update_updatesVenue_true() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    myVenue.update("Kodiak Theatre");
+    assertEquals("Kodiak Theatre", Venue.find(myVenue.getId()).getName());
+  }
+
+  @Test
+  public void addRecipe_addsBandToVenue_true() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    myVenue.addBand(myBand);
+    Band savedBand = myVenue.getBands().get(0);
+    assertTrue(myBand.equals(savedBand));
+  }
+
+  @Test
+  public void getRecipes_returnsAllBands_List() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    Band myBand = new Band("Blink-182");
+    myBand.save();
+    myVenue.addBand(myBand);
+    List savedBands = myVenue.getBands();
+    assertEquals(1, savedBands.size());
+  }
+
+  @Test
+  public void delete_deletesAllBandsAndVenuesAssociations() {
+    Venue myVenue = new Venue("Marquee Theatre");
+    myVenue.save();
+    Band myBand = new Band("Blink-182");
+    myVenue.addBand(myBand);
+    myVenue.delete();
+    assertEquals(0, myBand.getVenues().size());
+  }
 }
