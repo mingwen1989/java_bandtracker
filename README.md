@@ -40,7 +40,7 @@ Navigate to the terminal and restore the database
 $ psql bandtracker < bandtracker.sql
 ```
 
-Navigate back to the directory where this repository has been cloned and run gradle:
+Navigate back to the directory where this repository was cloned and run gradle:
 ```
 $ gradle run
 ```
